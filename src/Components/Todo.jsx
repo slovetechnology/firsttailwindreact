@@ -24,9 +24,9 @@ const Todo = () => {
                     text: res.data.msg,
                     icon: 'success',
                     showConfirmButton: false
-                })
+                });
                 setForm({title: ''})
-                alltodos()
+                alltodos();
             }else {
                 Swal.fire({
                     title: 'Request Failed',
