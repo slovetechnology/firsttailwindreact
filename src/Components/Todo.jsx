@@ -17,7 +17,7 @@ const Todo = () => {
     const saveForm = async(e) => {
         e.preventDefault()
         const data = {title: form.title}
-        await axios.post('http://localhost:5000/api/todo/save', data).then(res => {
+        await axios.post('https://firsttailwind-api.onrender.com/api/todo/save', data).then(res => {
             if(res.data.status === 200) {
                 Swal.fire({
                     title: 'Request Successful',
@@ -40,7 +40,7 @@ const Todo = () => {
     const updateForm = async(e) => {
         e.preventDefault()
         const data = {title: form.title}
-        await axios.put(`http://localhost:5000/api/todo/save/${todoid}`, data).then(res => {
+        await axios.put(`https://firsttailwind-api.onrender.com/api/todo/save/${todoid}`, data).then(res => {
             if(res.data.status === 200) {
                 Swal.fire({
                     title: 'Request Successful',
@@ -62,7 +62,7 @@ const Todo = () => {
     }
 
     const deleteTodo = async (id) => {
-        await axios.delete(`http://localhost:5000/api/todo/${id}`)
+        await axios.delete(`https://firsttailwind-api.onrender.com/api/todo/${id}`)
         .then(res => {
             if(res.data.status === 200) {
                 alltodos()
@@ -71,13 +71,13 @@ const Todo = () => {
     }
 
     const editTodo = async (id) => {
-        const res = await axios.get(`http://localhost:5000/api/todo/${id}`)
+        const res = await axios.get(`https://firsttailwind-api.onrender.com/api/todo/${id}`)
         setForm({title: res.data.msg.title})
         setTodoid(res.data.msg._id)
         setFormstate(true)
     }
     const alltodos = useCallback(async () => {
-            await axios.get('http://localhost:5000/api/todo')
+            await axios.get('https://firsttailwind-api.onrender.com/api/todo')
             .then(res => {
                 setTodos(res.data.msg)
             })
