@@ -9,8 +9,15 @@ import Footer from "./Components/Footer";
 // import Login from "./Components/Login";
 import Login2 from "./Components/Login2";
 import Todo from "./Components/Todo";
+import axios from "axios";
 // import Login3 from "./Components/Login3";
 
+
+// localhost server
+// axios.defaults.baseURL = 'http://localhost:5000'
+
+// render online server
+axios.defaults.baseURL = 'https://firsttailwind-api.onrender.com'
 function App() {
   return (
     <div className="">

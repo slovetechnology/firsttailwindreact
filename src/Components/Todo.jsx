@@ -17,7 +17,7 @@ const Todo = () => {
     const saveForm = async(e) => {
         e.preventDefault()
         const data = {title: form.title}
-        await axios.post('https://firsttailwind-api.onrender.com/api/todo/save', data).then(res => {
+        await axios.post('/api/todo/save', data).then(res => {
             if(res.data.status === 200) {
                 Swal.fire({
                     title: 'Request Successful',
@@ -40,7 +40,7 @@ const Todo = () => {
     const updateForm = async(e) => {
         e.preventDefault()
         const data = {title: form.title}
-        await axios.put(`https://firsttailwind-api.onrender.com/api/todo/save/${todoid}`, data).then(res => {
+        await axios.put(`/api/todo/save/${todoid}`, data).then(res => {
             if(res.data.status === 200) {
                 Swal.fire({
                     title: 'Request Successful',
@@ -62,7 +62,7 @@ const Todo = () => {
     }
 
     const deleteTodo = async (id) => {
-        await axios.delete(`https://firsttailwind-api.onrender.com/api/todo/${id}`)
+        await axios.delete(`/api/todo/${id}`)
         .then(res => {
             if(res.data.status === 200) {
                 alltodos()
@@ -71,14 +71,15 @@ const Todo = () => {
     }
 
     const editTodo = async (id) => {
-        const res = await axios.get(`https://firsttailwind-api.onrender.com/api/todo/${id}`)
+        const res = await axios.get(`/api/todo/${id}`)
         setForm({title: res.data.msg.title})
         setTodoid(res.data.msg._id)
         setFormstate(true)
     }
     const alltodos = useCallback(async () => {
-            await axios.get('https://firsttailwind-api.onrender.com/api/todo')
+            await axios.get('/api/todo')
             .then(res => {
+                console.log(res.data)
                 setTodos(res.data.msg)
             })
     }, [])
@@ -99,6 +100,9 @@ const Todo = () => {
     <div className='w-full h-screen bg-slate-200 mt-24'>
         <div className="w-full md:w-2/3 mx-auto">
             <div className="h-screen p-3">
+                <div className="py-4 mb-5">
+                    <div className="text-2xl md:text-4xl font-bold">Simple Crud Application with <span className="text-orange-100 bg-orange-500 rounded-lg px-5 drop-shadow-xl">MERNSTACK</span> </div>
+                </div>
                 <div className="text-end">
                     <button className={`py-2 text-white text-sm rounded-lg px-4 text-semibold shadow-xl ${!formstate ? 'bg-orange-500 hover:bg-orange-600' : 'bg-red-500 hover:bg-red-600'}`} onClick={activeformstate}>{!formstate ? 'Add New' : 'Close'}</button>
                 </div>
@@ -114,7 +118,7 @@ const Todo = () => {
                 </div>
                 {/* all todos */}
                 <div className="mt-5 overflow-y-auto h-[69vh]">
-                {todos && todos.map((item, index) => (
+                {todos ? todos.map((item, index) => (
                     <div className="flex justify-between py-2 mb-3 border-[1px] px-2 rounded-lg border-gray-300" key={index}>
                         <div className=""> {item.title} </div>
                         <div className="flex gap-6">
@@ -122,7 +126,7 @@ const Todo = () => {
                             <button className='py-1 px-4 bg-red-600 text-sm text-white rounded-full' onClick={() => deleteTodo(item._id)}>Delete</button>
                         </div>
                     </div>
-                ))}
+                )) : <div className='py-2 text-sm text-center bg-orange-100 rounded-lg w-full shadow-xl font-semibold my-5'>There is no saved data found</div> }
                 </div>
             </div>
         </div>
