@@ -6,7 +6,7 @@ import Support from "./Components/Support";
 import AllInOne from "./Components/AllInOne";
 import Pricing from "./Components/Pricing";
 import Footer from "./Components/Footer";
-// import Login from "./Components/Login";
+import Login from "./Components/Login";
 import Login2 from "./Components/Login2";
 import Todo from "./Components/Todo";
 import axios from "axios";
@@ -32,6 +32,7 @@ function App() {
       <AllInOne />
       <Pricing />
       <Login2 />
+      <div className="hidden md:block"><Login /></div>
       <Footer />
     </div>
   );

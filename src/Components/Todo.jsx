@@ -97,9 +97,9 @@ const Todo = () => {
     }
   return (
    <>
-    <div className='w-full h-screen bg-slate-200 mt-24'>
+    <div className='w-full h-max-h-[145vh] bg-slate-200 mt-24'>
         <div className="w-full md:w-2/3 mx-auto">
-            <div className="h-screen p-3">
+            <div className="max-h-[145vh] p-3">
                 <div className="py-4 mb-5">
                     <div className="text-2xl md:text-4xl font-bold">Simple Crud Application with <span className="text-orange-100 bg-orange-500 rounded-lg px-5 drop-shadow-xl">MERNSTACK</span> </div>
                 </div>
@@ -109,7 +109,7 @@ const Todo = () => {
                 <div className={`mt-4 border-2 border-slate-300 rounded-xl p-3 ${formstate ? '' : 'hidden'}`}>
                     <form onSubmit={!todoid ? saveForm : updateForm}>
                         <div className="mb-3">
-                            <input type="text" name="title" className="border w-full focus:outline-none rounded-lg py-2 pl-3" onChange={handleform} value={form.title} placeholder='Enter Title' />
+                            <textarea cols="30" rows="3"  name="title" className="border w-full focus:outline-none rounded-2xl py-2 pl-3" onChange={handleform} value={form.title} placeholder='Enter Title'></textarea>
                         </div>
                         <div className="text-end">
                             <button className='py-2 px-5 text-sm bg-green-600 rounded-sm font-semibold uppercase text-white'>{!todoid ? 'save' : 'update'}</button>
@@ -117,13 +117,13 @@ const Todo = () => {
                     </form>
                 </div>
                 {/* all todos */}
-                <div className="mt-5 overflow-y-auto h-[69vh]">
+                <div className="mt-5 overflow-y-auto max-h-[69vh]">
                 {todos ? todos.map((item, index) => (
                     <div className="flex justify-between py-2 mb-3 border-[1px] px-2 rounded-lg border-gray-300" key={index}>
-                        <div className=""> {item.title} </div>
+                        <div className=" whitespace-pre-wrap"> {item.title} </div>
                         <div className="flex gap-6">
-                            <button className='py-1 px-4 bg-blue-600 text-sm text-white rounded-full' onClick={() => editTodo(item._id)}>Edit</button>
-                            <button className='py-1 px-4 bg-red-600 text-sm text-white rounded-full' onClick={() => deleteTodo(item._id)}>Delete</button>
+                            <button className='py-2 drop-shadow-lg px-4 bg-blue-600 text-sm text-white rounded-full self-center' onClick={() => editTodo(item._id)}>Edit</button>
+                            <button className='py-2 drop-shadow-lg px-4 bg-red-600 text-sm text-white rounded-full self-center' onClick={() => deleteTodo(item._id)}>Delete</button>
                         </div>
                     </div>
                 )) : <div className='py-2 text-sm text-center bg-orange-100 rounded-lg w-full shadow-xl font-semibold my-5'>There is no saved data found</div> }
